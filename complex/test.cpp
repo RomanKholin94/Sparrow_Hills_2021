@@ -23,6 +23,7 @@ public:
     }
 
     bool operator==(const Complex& other) const {
+    
     }
 
     Complex operator-() const {
