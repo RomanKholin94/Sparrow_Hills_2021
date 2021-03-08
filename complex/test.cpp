@@ -123,5 +123,5 @@ int main() {
 
     cout << "Number of tests: " << tests << ", number of errors: " << errors << endl;
 
-    return 0;
+
 }
