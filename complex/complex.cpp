@@ -1,4 +1,4 @@
-nclude <iostream>
+#include <iostream>
 #include <cmath>
 
 using namespace std;
@@ -19,7 +19,7 @@ public:
     }
 
     Complex& operator=(const Complex& copied) {
-     	 _real = copied._real;
+     	_real = copied._real;
         _imaginary = copied._imaginary;
         return (*this);
     }
