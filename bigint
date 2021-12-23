@@ -1,0 +1,180 @@
+class BigInt {
+public:
+    BigInt() {
+        _data.push_back(0);
+    }
+
+    BigInt(const long long x) {
+        long long z=x;
+        if(x==0)
+        {
+            _data.push_back(x);
+        }
+        while(z>0)
+        {
+            _data.push_back(z%10);
+            z/=10;
+        }
+    }
+
+    BigInt(const BigInt& other) {
+        _data.clear();
+        for(int i=0;i<other._data.size();i++)
+        {
+            _data.push_back(other._data[i]);
+        }
+    }
+
+    BigInt& operator=(const BigInt& other) {
+         _data.clear();
+        for(int i=0;i<other._data.size();i++)
+        {
+            _data.push_back(other._data[i]);
+        }
+        return *this;
+    }
+
+    BigInt operator+(const BigInt& other) const {
+        BigInt ans;
+        ans._data.clear();
+        int t=0;
+        for(int i=0;i<max(_data.size(),other._data.size());++i)
+        {
+            if(i<_data.size())
+            {
+                t+=_data[i];
+            }
+            if(i<other._data.size())
+            {
+                t+=other._data[i];
+            }
+            ans._data.push_back(t%10);
+            t/=10;
+        }
+        if(t>0)
+        {
+            ans._data.push_back(t);
+        }
+        return ans;
+    }
+
+    BigInt operator*(const BigInt& other) const {
+        BigInt ans;
+        if(*this==BigInt(0)||other==BigInt(0))
+        {
+            return ans;
+        }
+        ans._data.clear();
+        for(int i=0;i<_data.size();++i)
+        {
+            int t=0;
+            int j;
+            for(j=0;j<other._data.size();++j)
+            {
+                t+=_data[i]*other._data[j];
+                if(i+j<ans._data.size())
+                {
+                    t+=ans._data[i+j];
+                    ans._data[i+j]=t%10;
+                }else
+                {
+                     ans._data.push_back(t%10);
+                }
+                t/=10;
+            }
+            int o=j+i;
+            while(t>0)
+            {
+                if(o<ans._data.size())
+                {
+                    t+=ans._data[o];
+                    ans._data[o]=t%10;
+                }
+                else
+                {
+                    ans._data.push_back(t%10);
+                }
+                t/=10;
+                ++o;
+            }
+        }
+        return ans;
+    }
+
+    bool operator==(const BigInt& other) const {
+        if(_data.size()!=other._data.size())
+        {
+            return false;
+        }
+        for(int i=0;i<_data.size();++i)
+        {
+            if(_data[i]!=other._data[i])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    bool operator!=(const BigInt& other) const {
+        return !(*this==other);
+    }
+
+    bool operator<(const BigInt& other) const {
+        if(_data.size()<other._data.size())
+        {
+            return true;
+        }
+        if(_data.size()>other._data.size())
+        {
+            return false;
+        }
+        for(int i=0;i<_data.size();++i)
+        {
+            if(_data[i]<other._data[i])
+            {
+                return true;
+            }
+            if(_data[i]>other._data[i])
+            {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    bool operator<=(const BigInt& other) const {
+        return !(*this>other);
+    }
+
+    bool operator>(const BigInt& other) const {
+        if(_data.size()<other._data.size())
+        {
+            return false;
+        }
+        if(_data.size()>other._data.size())
+        {
+            return true;
+        }
+        for(int i=0;i<_data.size();++i)
+        {
+            if(_data[i]<other._data[i])
+            {
+                return false;
+            }
+            if(_data[i]>other._data[i])
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool operator>=(const BigInt& other) const {
+        return !(*this<other);
+    }
+
+    friend std::ostream& operator<<(std::ostream& out, const BigInt& value);
+private:
+    vector<int>_data;
+};
