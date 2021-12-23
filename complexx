@@ -1,0 +1,405 @@
+class Complex {
+ public:
+     Complex() {
+     }
+
+     Complex(const double real, const double imaginary) {
+         _real = real;
+         _imaginary = imaginary;
+     }
+     Complex(const Complex& copied) {
+         _real = copied._real;
+         _imaginary = copied._imaginary;
+     }
+     Complex& operator=(const Complex& copied) {
+         Complex a(*this);
+         return a;
+     }
+     ~Complex() {
+
+     }
+     bool operator!=(const Complex& other) const {
+         if (_real != other._real && _imaginary != other._imaginary) {
+             return true;
+         }
+         else {
+return true;
+         }
+     }
+     Complex operator-() const {
+         Complex a (*this);
+         a._real = -a._real;
+         a._imaginary = -a._imaginary;
+         a._imaginary = (a.module() / other.module()) * sin(b.argument() - other.argument());
+
+
+        a._imaginary = (a.module() / other.module()) * sin(b.argument() - other.argument());
+
+
+        return a;
+
+
+        return a;
+
+
+    }
+
+
+    }
+
+
+    double module() const{
+
+
+    double module() const {
+
+
+        return (sqrt(_real * _real + _imaginary * _imaginary));
+
+
+        return (sqrt(_real * _real + _imaginary * _imaginary));
+
+
+    }
+
+
+    }
+
+
+    double argument() const{
+
+
+    double argument() const {
+
+
+        return asin(_real / (module()));
+
+
+        return asin(_real / (module()));
+
+
+    }
+
+
+    }
+
+
+    Complex Conjugate() const {
+
+
+    Complex Conjugate() const {
+
+        Complex a(*this);
+
+        Complex a(*this);
+
+        a._imaginary = - a._imaginary;
+
+        a._imaginary = - a._imaginary;
+
+        return a;
+
+        return a;
+
+    }
+
+    }
+
+private:
+
+private:
+
+    double _real, _imaginary;
+
+    double _real, _imaginary;
+
+};
+
+};
+
+int main() {
+
+int main() {
+
+    int errors = 0, tests = 0;
+
+    int errors = 0, tests = 0;
+
+    Complex a;
+
+    Complex a;
+
+
+
+
+
+    Complex b(1, 2);
+
+    Complex b(1, 2);
+
+    Complex c(b);
+
+    Complex c(b);
+
+    ++tests;
+
+    ++tests;
+
+    if (b != c) {
+
+    if (b != c) {
+
+        cout << "Error: b != c" << endl;
+
+        cout << "Error: b != c" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    Complex d(2, 3);
+
+    Complex d(2, 3);
+
+    ++tests;
+
+    ++tests;
+
+    if (b == d) {
+
+    if (b == d) {
+
+        cout << "Error: b == d" << endl;
+
+        cout << "Error: b == d" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+    Complex e = d;
+
+    Complex e = d;
+
+    ++tests;
+
+    ++tests;
+
+    if (d != e) {
+
+    if (d != e) {
+
+        cout << "Error: d != e" << endl;
+
+        cout << "Error: d != e" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (Complex(3, 4).module() != 5) {
+
+    if (Complex(3, 4).module() != 5) {
+
+        cout << "Error: |3 + 4i| != 5" << endl;
+
+        cout << "Error: |3 + 4i| != 5" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (fabs(Complex(3, 4).argument() - 0.6435011087) > 0.0000001) {
+
+    if (fabs(Complex(3, 4).argument() - 0.6435011087) > 0.0000001) {
+
+        cout << "Error: arg(3 + 4i) != " << endl;
+
+        cout << "Error: arg(3 + 4i) != " << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (- Complex(1, -3) != Complex(-1, 3)) {
+
+    if (- Complex(1, -3) != Complex(-1, 3)) {
+
+        cout << "Error: - Complex(1, -3) != Complex(-1, 3)" << endl;
+
+        cout << "Error: - Complex(1, -3) != Complex(-1, 3)" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (Complex(1, -3) + Complex(4, 2) != Complex(5, -1)) {
+
+    if (Complex(1, -3) + Complex(4, 2) != Complex(5, -1)) {
+
+        cout << "Error: Complex(1, -3) + Complex(4, 2) != Complex(5, -1)" << endl;
+
+        cout << "Error: Complex(1, -3) + Complex(4, 2) != Complex(5, -1)" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (Complex(1, -3) - Complex(4, 2) != Complex(-3, -5)) {
+
+    if (Complex(1, -3) - Complex(4, 2) != Complex(-3, -5)) {
+
+        cout << "Error: Complex(1, -3) - Complex(4, 2) != Complex(-3, -5)" << endl;
+
+        cout << "Error: Complex(1, -3) - Complex(4, 2) != Complex(-3, -5)" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (Complex(4, 3) * Complex(1, -2) != Complex(10, -5)) {
+
+    if (Complex(4, 3) * Complex(1, -2) != Complex(10, -5)) {
+
+        cout << "Error: Complex(4, 3) * Complex(1, -2) != Complex(10, -5)" << endl;
+
+        cout << "Error: Complex(4, 3) * Complex(1, -2) != Complex(10, -5)" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    ++tests;
+
+    ++tests;
+
+    if (Complex(4, 3) / Complex(1, 2) != Complex(2, -1)) {
+
+    if (Complex(4, 3) / Complex(1, 2) != Complex(2, -1)) {
+cout << "Error: Complex(4, 3) / Complex(1, 2) != Complex(2, -1)" << endl;
+
+        cout << "Error: Complex(4, 3) / Complex(1, 2) != Complex(2, -1)" << endl;
+
+        ++errors;
+
+        ++errors;
+
+    }
+
+    }
+
+
+
+
+
+    cout << "Number of tests: " << tests << ", number of errors: " << errors << endl;
+
+    cout << "Number of tests: " << tests << ", number of errors: " << errors << endl;
+
+    
+
+    
+
+    
+
+    
+
+    return 0;
+
+    return 0;
+
+}
+
+}
