@@ -1,0 +1,115 @@
+template <class T>
+class Vector {
+public:
+    Vector(int r)
+    {
+        _size=r;
+        _capacity=r;
+        _data=new T[_capacity];
+    }
+    Vector()
+    {
+        _size=0;
+        _capacity=1;
+        _data=new T[_capacity];
+
+    }
+    Vector(int x, T y)
+    {
+        _size=x;
+        _capacity=x;
+        _data=new T[_capacity];
+        for(int i=0;i<_size;++i)
+        {
+            _data[i]=y;
+        }
+    }
+    T operator[](const int i)const
+    {
+        return _data[i];
+    }
+    int size()
+    {
+        return _size;
+    }
+    bool empty()
+    {
+        if(_size!=0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+    void push_back(T x){
+        if(_capacity==_size)
+        {
+            _capacity*=2;
+            T* temp = new T[_capacity];
+            for(int i=0;i<_size;i++)
+            {
+                temp[i]=_data[i];
+            }
+            delete _data;
+            _data=temp;
+        }
+        _data[_size]=x;
+        ++_size;
+    }
+    void pop_back(){
+        --_size;
+        if(_capacity>=4*_size)
+        {
+            _capacity=_capacity/4;
+            T* temp = new T[_capacity];
+            for(int i=0;i<_size-1;i++)
+            {
+                temp[i]=_data[i];
+            }
+            delete _data;
+            _data=temp;
+        }
+    }
+    int capacity(){
+        return _capacity;
+    }
+    void resize(int n){
+        _capacity=max(_capacity,n);
+        T* temp=new T[_capacity];
+        for(int i=0; i<min(n,_size); i++)
+        {
+            temp[i]=_data[i];
+        }
+        delete _data;
+        _data=temp;
+        _size=n;
+    }
+    void reserve(int n){
+        if(_capacity<n)
+        {
+            T* temp=new T[n];
+            for(int i=0;i<_size;i++)
+            {
+                temp[i]=_data[i];
+            }
+            delete _data;
+            _data=temp;
+        }
+        _capacity=n;
+        
+    }
+    void clear(){
+        _size=0;
+        _capacity=1;
+        T* temp=new T[_capacity];
+        delete _data;
+        _data=temp;
+    }
+private:
+    int _size;
+    T*_data;
+    int _capacity;
+
+};
